@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:petugas_perpustakaan_kelas_c/app/data/constant/endpoint.dart';
 import 'package:petugas_perpustakaan_kelas_c/app/data/provider/api_provider.dart';
+import 'package:petugas_perpustakaan_kelas_c/app/modules/book/controllers/book_controller.dart';
 import 'package:petugas_perpustakaan_kelas_c/app/routes/app_pages.dart';
 
 import '../../../data/provider/storage_provider.dart';
@@ -17,6 +18,8 @@ class AddBookController extends GetxController {
   final TextEditingController penerbitController = TextEditingController();
   final TextEditingController tahunterbitController = TextEditingController();
   final loading = false.obs;
+  final count = 0.obs;
+  final BookController _bookController = Get.find();
 
 
   @override
@@ -34,7 +37,7 @@ class AddBookController extends GetxController {
     super.onClose();
   }
 
-  login() async {
+  add() async {
     loading(true);
     try {
       FocusScope.of(Get.context!).unfocus();
@@ -48,6 +51,7 @@ class AddBookController extends GetxController {
               "tahun_terbit": int.parse(tahunterbitController.text.toString()),
             }));
         if (response.statusCode == 201) {
+          _bookController.getData();
           //Get.snackbar("Berhasil", "Buku telah ditambahkan", backgroundColor: Colors.red);
           Get.back();
         } else {

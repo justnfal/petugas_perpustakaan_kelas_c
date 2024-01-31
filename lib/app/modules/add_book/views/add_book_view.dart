@@ -60,9 +60,9 @@ class AddBookView extends GetView<AddBookController> {
                     ? CircularProgressIndicator()
                     : ElevatedButton(
                     onPressed: () {
-                      controller.login();
+                      controller.add();
                     },
-                    child: Text("Login"))),
+                    child: Text("Add Book"))),
                 // ElevatedButton(onPressed: (){controller.login();}, child: Text("Login"))
               ],
             ),
